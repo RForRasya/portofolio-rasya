@@ -841,67 +841,6 @@
             color: var(--accent-color);
         }
 
-        /* Certifications Section */
-        .certifications {
-            background: white;
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .cert-card {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .cert-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-
-        .cert-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .cert-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-issuer {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .cert-status {
-            display: inline-block;
-            background: #dcfce7;
-            color: #166534;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
         /* Contact Section */
         .contact {
             background: var(--surface);
@@ -1318,17 +1257,7 @@
             </div>
             <div class="hero-image">
                 <div class="profile-container">
-                    <div class="profile-placeholder" id="profilePlaceholder">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <img class="profile-image" id="profileImage" style="display: none;" alt="Muhamad Rasya">
-                    <div class="upload-overlay" id="uploadOverlay">
-                        <div class="upload-text">
-                            <i class="fas fa-camera" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                            <p>Klik untuk upload foto</p>
-                        </div>
-                    </div>
-                    <input type="file" id="imageUpload" accept="image/*">
+                    <img class="profile-image float-animation" src="/images/profile-photo.jpg" alt="Muhamad Rasya" style="display: block;">
                 </div>
             </div>
         </div>
@@ -1715,10 +1644,16 @@
                         <h3>Lokasi Saya</h3>
                         <p>Klik untuk membuka di Google Maps</p>
                     </div>
-                    
+                    <div class="map-overlay">
+                        <h4><i class="fas fa-map-marker-alt"></i> Depok, Jawa Barat</h4>
+                        <a href="https://maps.google.com/maps?q=Tapos,+Depok,+Jawa+Barat,+Indonesia&t=&z=13&ie=UTF8&iwloc=&output=embed" target="_blank" class="map-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Buka di Google Maps
+                        </a>
+                    </div>
                     <iframe 
                         class="map-iframe"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15858.38016355253!2d106.8643632334032!3d-6.446009024531263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ea8e778f77db%3A0xf9146fb713fa0ec6!2sCimpaeun%2C%20Kec.%20Tapos%2C%20Kota%20Depok%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1748998154936!5m2!1sid!2sid"
+                        src="https://maps.google.com/maps?q=Tapos,+Depok,+Jawa+Barat,+Indonesia&t=&z=13&ie=UTF8&iwloc=&output=embed"
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
@@ -1732,10 +1667,10 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://linkedin.com/in/mhmd-rasya" class="social-link" target="_blank">
+                <a href="https://linkedin.com/in/muhamadrasya" class="social-link" target="_blank">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://github.com/RForRasya" class="social-link" target="_blank">
+                <a href="https://github.com/muhamadrasya" class="social-link" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="mailto:mhmdrasya64@gmail.com" class="social-link">
@@ -1745,7 +1680,7 @@
                     <i class="fas fa-phone"></i>
                 </a>
             </div>
-            <p>&copy; 2025 Muhamad Rasya - With Vercel.</p>
+            <p>&copy; 2024 Muhamad Rasya. All rights reserved. Designed with ❤️ for professional excellence.</p>
         </div>
     </footer>
 
@@ -1811,43 +1746,6 @@
                 }
             });
         });
-
-        // Image upload functionality
-        const imageUpload = document.getElementById('imageUpload');
-        const profileImage = document.getElementById('profileImage');
-        const profilePlaceholder = document.getElementById('profilePlaceholder');
-        const uploadOverlay = document.getElementById('uploadOverlay');
-
-        // Click handlers for image upload
-        profilePlaceholder.addEventListener('click', () => imageUpload.click());
-        uploadOverlay.addEventListener('click', () => imageUpload.click());
-
-        imageUpload.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profileImage.src = e.target.result;
-                    profileImage.style.display = 'block';
-                    profilePlaceholder.style.display = 'none';
-                    
-                    // Save to localStorage
-                    localStorage.setItem('profileImage', e.target.result);
-                    
-                    // Show success message
-                    showNotification('Foto profil berhasil diupload!', 'success');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Load saved profile image
-        const savedImage = localStorage.getItem('profileImage');
-        if (savedImage) {
-            profileImage.src = savedImage;
-            profileImage.style.display = 'block';
-            profilePlaceholder.style.display = 'none';
-        }
 
         // Fade in animation on scroll
         const observerOptions = {
